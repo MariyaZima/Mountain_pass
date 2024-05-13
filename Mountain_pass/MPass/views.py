@@ -1,3 +1,4 @@
+import django_filters
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from drf_yasg.utils import swagger_auto_schema
@@ -29,6 +30,7 @@ class MountainViewset(viewsets.ModelViewSet):
     queryset = Mountain.objects.all()
     serializer_class = MountainSerializer
     filterset_fields = ('user__email',)
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
 
     def create(self, request, *args, **kwargs):
         serializer = MountainSerializer(data=request.data)

@@ -33,18 +33,19 @@ class MountainSerializer(WritableNestedModelSerializer):
     add_time = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
     user = UserSerializer()
     coord = CoordsSerializer()
-    level = LevelSerializer()
+    level = LevelSerializer(allow_null=True)
     images = ImagesSerializer(many=True)
     status = serializers.CharField()
 
     class Meta:
         model = Mountain
-        fields = ['beauty_title',
+        fields = ['id',
+                  'status',
+                  'add_time',
+                  'beauty_title',
                   'title',
                   'other_titles',
                   'connect',
-                  'add_time',
-                  'status',
                   'user',
                   'coord',
                   'level',
